@@ -47,7 +47,8 @@ install_packages() {
     done
 
     echo "All packages installed successfully."
-    
+
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
     echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
 }
 
