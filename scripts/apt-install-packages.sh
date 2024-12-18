@@ -16,6 +16,6 @@ for package in "${PACKAGES[@]}"; do
 done
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-chsh -s /bin/zsh
+chsh -s /usr/bin/zsh
 
 echo "Essential packages installed successfully."

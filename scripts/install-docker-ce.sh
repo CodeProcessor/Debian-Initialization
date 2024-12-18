@@ -24,5 +24,11 @@ sudo apt-get update
 # Install Docker packages
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+# Add the current user to the Docker group
+sudo gpasswd -a $USER docker
+
+# Activate the changes to groups
+newgrp docker
+
 # Test Docker installation
 sudo docker run hello-world
