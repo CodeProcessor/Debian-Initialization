@@ -21,6 +21,10 @@ install_brew:
 	@echo "Installing APT packages..."
 	./scripts/brew-install-packages.sh
 
+enable_ssh_server:
+	@echo "Enabling SSH server..."
+	./scripts/enable-ssh-server.sh
+	
 # Configure dotfiles and custom setup
 config:
 	@echo "Configuring dotfiles..."
@@ -29,7 +33,7 @@ config:
 # Clean up system
 clean:
 	@echo "Cleaning up..."
-	./scripts/clean.sh
+	./scripts/clean_docker_images.sh
 
 # Display help
 help:
