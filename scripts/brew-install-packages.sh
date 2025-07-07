@@ -31,13 +31,19 @@ install_packages() {
     PACKAGES=(
         htop
         btop
-        neovim
         tmux
         tree
         fzf
         atuin
         kubectl
         helm
+        zoxide
+        bat
+        fd
+        exa
+        ripgrep
+        tldr
+        nerdfetch
     )
 
     # Install each package
@@ -50,6 +56,15 @@ install_packages() {
 
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
     echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
+    echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
+    echo 'eval "$(nerdfetch)"' >> ~/.zshrc
+
+    # Add aliases for vi, vim, and inv
+    echo 'alias vi="nvim"' >> ~/.zshrc
+    echo 'alias vim="nvim"' >> ~/.zshrc
+    echo 'alias inv="nvim $(fzf -m --preview "bat --style=numbers --color=always --line-range :500 {}" --preview-window=up:60%)"' >> ~/.zshrc
+    # Add alias for cd to use zoxide
+    echo 'alias cd="z"' >> ~/.zshrc
 }
 
 # Main script execution

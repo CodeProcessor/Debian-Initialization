@@ -1,4 +1,7 @@
-.PHONY: all update install_apt install_brew config clean help add_permissions
+
+[private]
+default:
+	just --list
 
 # Default action
 all: add_permissions update install_apt install_brew
