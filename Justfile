@@ -4,39 +4,48 @@ default:
 	just --list
 
 # Default action
-all: add_permissions update install_apt install_brew
+all: add_permissions install_apt install_brew
 
 add_permissions:
 	@echo "Adding permissions..."
-	chmod +x scripts/*.sh
+	sudo chmod +x scripts/*.sh
 
 # Update system
 update:
+	#!/bin/bash
 	@echo "Updating system..."
-	./scripts/update.sh
+	./scripts/updates.sh
 
 # Install essential packages
-install_apt:
+install_apt:add_permissions
+	#!/bin/bash
 	@echo "Installing APT packages..."
 	./scripts/apt-install-packages.sh
 
-install_brew:
+install_brew:add_permissions
 	@echo "Installing APT packages..."
 	./scripts/brew-install-packages.sh
+	source ~/.zshrc
 
-enable_ssh_server:
+enable_ssh_server:add_permissions
 	@echo "Enabling SSH server..."
 	./scripts/enable-ssh-server.sh
 	
 # Configure dotfiles and custom setup
-config:
+config:add_permissions
 	@echo "Configuring dotfiles..."
 	./scripts/configure-dotfiles.sh
 
 # Clean up system
-clean:
+clean:add_permissions
 	@echo "Cleaning up..."
 	./scripts/clean_docker_images.sh
+
+# test this using docker file
+test:
+	@echo "Testing..."
+	docker build -t debian-init --network=host .
+	docker run -it --rm debian-init
 
 # Display help
 help:

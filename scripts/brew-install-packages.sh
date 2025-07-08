@@ -29,6 +29,7 @@ install_packages() {
 
     # List of packages to install
     PACKAGES=(
+        gcc
         htop
         btop
         tmux
@@ -53,20 +54,35 @@ install_packages() {
     done
 
     echo "All packages installed successfully."
+    
+}
 
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
-    echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
-    echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
-    echo 'eval "$(nerdfetch)"' >> ~/.zshrc
+# Function to configure zshrc with aliases and commands
+configure_zshrc() {
+    echo "Configuring .zshrc with aliases and commands..."
 
-    # Add aliases for vi, vim, and inv
-    echo 'alias vi="nvim"' >> ~/.zshrc
-    echo 'alias vim="nvim"' >> ~/.zshrc
-    echo 'alias inv="nvim $(fzf -m --preview "bat --style=numbers --color=always --line-range :500 {}" --preview-window=up:60%)"' >> ~/.zshrc
-    # Add alias for cd to use zoxide
-    echo 'alias cd="z"' >> ~/.zshrc
+    # Define the commands to add to .zshrc
+    ZSHRC_COMMANDS=(
+        'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+        'eval "$(atuin init zsh)"'
+        'eval "$(zoxide init --cmd cd zsh)"'
+        'alias vi="nvim"'
+        'alias vim="nvim"'
+        'alias inv="nvim $(fzf -m --preview "bat --style=numbers --color=always --line-range :500 {}" --preview-window=up:60%)"'
+    )
+
+    # Check and add each command if not already present
+    for command in "${ZSHRC_COMMANDS[@]}"; do
+        if ! grep -Fxq "$command" ~/.zshrc; then
+            echo "$command" >> ~/.zshrc
+            echo "Added $command to .zshrc"
+        fi
+    done
+
+    echo ".zshrc configuration complete."
 }
 
 # Main script execution
 install_brew
 install_packages
+configure_zshrc
