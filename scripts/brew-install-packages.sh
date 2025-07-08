@@ -41,18 +41,11 @@ install_packages() {
         zoxide
         bat
         fd
-        exa
-        ripgrep
         tldr
         nerdfetch
     )
 
-    # Install each package
-    for package in "${PACKAGES[@]}"; do
-        echo "Installing $package..."
-        brew install "$package"
-    done
-
+    brew install "${PACKAGES[@]}"
     echo "All packages installed successfully."
     
 }

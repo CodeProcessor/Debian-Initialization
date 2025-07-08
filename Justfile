@@ -21,11 +21,12 @@ install_apt:add_permissions
 	#!/bin/bash
 	@echo "Installing APT packages..."
 	./scripts/apt-install-packages.sh
+	zsh
 
 install_brew:add_permissions
 	@echo "Installing APT packages..."
 	./scripts/brew-install-packages.sh
-	source ~/.zshrc
+	zsh
 
 enable_ssh_server:add_permissions
 	@echo "Enabling SSH server..."
