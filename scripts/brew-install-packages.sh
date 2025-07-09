@@ -32,15 +32,10 @@ install_packages() {
         gcc
         htop
         btop
-        tmux
-        tree
         fzf
         atuin
-        kubectl
-        helm
         zoxide
         bat
-        fd
         tldr
         nerdfetch
     )
@@ -57,11 +52,12 @@ configure_zshrc() {
     # Define the commands to add to .zshrc
     ZSHRC_COMMANDS=(
         'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
-        'eval "$(atuin init zsh)"'
+        'eval "$(atuin init zsh --disable-up-arrow)"'
         'eval "$(zoxide init --cmd cd zsh)"'
-        'alias vi="nvim"'
-        'alias vim="nvim"'
-        'alias inv="nvim $(fzf -m --preview "bat --style=numbers --color=always --line-range :500 {}" --preview-window=up:60%)"'
+        'alias vi=nvim'
+        'alias vim=nvim'
+        'alias inv=nvim $(fzf -m --preview "cat {}")'
+        'nerdfetch'
     )
 
     # Check and add each command if not already present
