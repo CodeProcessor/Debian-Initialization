@@ -38,10 +38,17 @@ install_packages() {
         bat
         tldr
         nerdfetch
+        eza
+        ripgrep
+        ranger
     )
 
     brew install "${PACKAGES[@]}"
     echo "All packages installed successfully."
+
+    # change eza theme
+    mkdir -p ~/.config/eza
+    wget -O ~/.config/eza/theme.yml https://raw.githubusercontent.com/eza-community/eza-themes/refs/heads/main/themes/dracula.yml
     
 }
 
@@ -54,9 +61,14 @@ configure_zshrc() {
         'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
         'eval "$(atuin init zsh --disable-up-arrow)"'
         'eval "$(zoxide init --cmd cd zsh)"'
-        'alias vi=nvim'
-        'alias vim=nvim'
+        'alias vi="nvim"'
+        'alias vim="nvim"'
         'alias inv=nvim $(fzf -m --preview "cat {}")'
+        'alias ls="eza"'
+        'alias ll="eza -alh"'
+        'alias tree="eza --tree"'
+        'alias cat="bat"'
+        'alias ra="ranger"'
         'nerdfetch'
     )
 
